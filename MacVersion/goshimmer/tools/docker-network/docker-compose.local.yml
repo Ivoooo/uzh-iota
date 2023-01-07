@@ -1,0 +1,50 @@
+version: "3.9"
+# Create a custom build that can be re-used within Docker network
+x-build-goshimmer: &goshimmer_build
+  context: ../../
+  args:
+    DOWNLOAD_SNAPSHOT: 0
+services:
+  peer_master_22:
+    build: *goshimmer_build
+    stop_grace_period: 1m
+    environment:
+      - AUTOPEERING_BINDADDRESS=0.0.0.0:14629
+      - P2P_BINDADDRESS=0.0.0.0:14669
+      - WEBAPI_BINDADDRESS=0.0.0.0:8050
+      - DASHBOARD_BINDADDRESS=0.0.0.0:8051
+      - PROFILING_BINDADDRESS=0.0.0.0:6041
+      - PROMETHEUS_BINDADDRESS=0.0.0.0:9411
+    command: >
+      --analysis.dashboard.dev=false
+      --autoPeering.entryNodes=EYsaGXnUVA9aTYL9FwYEvoQ8d1HCJveQVL7vogu6pqCP@172.23.25.107:14626
+      --config=/run/secrets/goshimmer.config.json
+      --database.directory=/app/mainnetdb
+      --node.peerDBDirectory=/app/peerdb
+      --mana.enableResearchVectors=false
+      --blockLayer.snapshot.file=/run/secrets/goshimmer.block.snapshot.bin
+      --blockLayer.snapshot.genesisNode=
+      --metrics.global=true
+      --metrics.local=true
+      --metrics.manaResearch=false
+      --node.disablePlugins=portcheck,clock,Firewall,ManaInitializer
+      --node.enablePlugins=analysisServer,analysisDashboard,prometheus,spammer,WebAPIToolsBlockEndpoint,activity,snapshot
+      --prometheus.processMetrics=false
+      --blockLayer.startSynced=true
+    secrets:
+      - goshimmer.config.json
+      - goshimmer.block.snapshot.bin
+    expose:
+      - 1888/tcp # analysis server
+    ports:
+      - "18080:8050/tcp" # web API
+      - "18081:8051/tcp" # dashboard
+      - "18061:8061/tcp" # dags visualizer
+      - "19000:9000/tcp" # analysis dashboard
+      - "16081:6041/tcp" # pprof
+
+secrets:
+  goshimmer.block.snapshot.bin:
+    file: ${SNAPSHOT_FILE:-./docker-network.snapshot}
+  goshimmer.config.json:
+    file: ${GOSHIMMER_CONFIG:-./config.docker.json}
