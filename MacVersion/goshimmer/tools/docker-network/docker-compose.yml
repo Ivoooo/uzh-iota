@@ -46,6 +46,7 @@ services:
       - "8061:8061/tcp" # dags visualizer
       - "9000:9000/tcp" # analysis dashboard
       - "6081:6061/tcp" # pprof
+      - "14626:14626/tcp"
     expose:
       - 1888/tcp # analysis server
     networks:
@@ -81,6 +82,7 @@ services:
       - "8070:8080/tcp" # web API
       - "8071:8081/tcp" # dashboard
       - "6071:6061/tcp" # pprof
+      - "14627:14627/tcp"
     networks:
       - goshimmer
     depends_on:
@@ -118,6 +120,7 @@ services:
       - "8051:8051/tcp" # dags visualizer
       - "8091:8091/tcp" # dashboard
       - "6091:6091/tcp" # pprof
+      - "14628:14628/tcp"
     networks:
       - goshimmer
     depends_on:
