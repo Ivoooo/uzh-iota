@@ -30,8 +30,9 @@ services:
       --metrics.local=true
       --metrics.manaResearch=false
       --node.disablePlugins=portcheck,clock,Firewall,ManaInitializer
-      --node.enablePlugins=analysisServer,analysisDashboard,prometheus,spammer,WebAPIToolsBlockEndpoint,activity,snapshot
+      --node.enablePlugins=analysisServer,analysisDashboard,prometheus,spammer,WebAPIToolsBlockEndpoint,activity,snapshot,faucet,"WebAPIFaucetEndpoint"
       --prometheus.processMetrics=false
+      --faucet.seed=7R1itJx5hVuo9w9hjg5cwKFmek4HMSoBDgJZN8hKGxih
       --blockLayer.startSynced=true
     secrets:
       - goshimmer.config.json
@@ -62,7 +63,7 @@ services:
     command: >
       --config=/run/secrets/goshimmer.config.json
       --database.directory=/app/mainnetdb
-      --node.enablePlugins="webapi tools endpoint",activity,spammer,prometheus
+      --node.enablePlugins="webapi tools endpoint",activity,spammer,prometheus,faucet,"WebAPIFaucetEndpoint"
       --autoPeering.entryNodes=EYsaGXnUVA9aTYL9FwYEvoQ8d1HCJveQVL7vogu6pqCP@172.23.25.107:14626
       --node.seed=base58:4ata8GcTRMJ5sSv2jQJWmSYYTHct748p3tXmCFYm7wjA
       --node.overwriteStoredSeed=true
@@ -71,6 +72,7 @@ services:
       --node.disablePlugins=portcheck,clock,Firewall,ManaInitializer,DAGsVisualizer
       --prometheus.bindAddress=0.0.0.0:9311
       --prometheus.processMetrics=false
+      --faucet.seed=7R1itJx5hVuo9w9hjg5cwKFmek4HMSoBDgJZN8hKGxih
       --blockLayer.startSynced=true
     secrets:
       - goshimmer.config.json
@@ -91,7 +93,7 @@ services:
       - P2P_BINDADDRESS=0.0.0.0:14668
       - WEBAPI_BINDADDRESS=0.0.0.0:8090
       - DASHBOARD_BINDADDRESS=0.0.0.0:8091
-      - PROFILING_BINDADDRESS=0.0.0.0:6071
+      - PROFILING_BINDADDRESS=0.0.0.0:6091
       - PROMETHEUS_BINDADDRESS=0.0.0.0:9321
     command: >
       --config=/run/secrets/goshimmer.config.json
@@ -112,10 +114,10 @@ services:
       - goshimmer.config.json
       - goshimmer.block.snapshot.bin
     ports:
-      - "8090:8080/tcp" # web API
-      - "8051:8061/tcp" # dags visualizer
-      - "8091:8081/tcp" # dashboard
-      - "6091:6061/tcp" # pprof
+      - "8090:8090/tcp" # web API
+      - "8051:8051/tcp" # dags visualizer
+      - "8091:8091/tcp" # dashboard
+      - "6091:6091/tcp" # pprof
     networks:
       - goshimmer
     depends_on:

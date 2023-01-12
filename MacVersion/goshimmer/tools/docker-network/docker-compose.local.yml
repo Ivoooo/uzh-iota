@@ -28,9 +28,10 @@ services:
       --metrics.local=true
       --metrics.manaResearch=false
       --node.disablePlugins=portcheck,clock,Firewall,ManaInitializer
-      --node.enablePlugins=analysisServer,analysisDashboard,prometheus,spammer,WebAPIToolsBlockEndpoint,activity,snapshot
+      --node.enablePlugins=faucet,analysisServer,analysisDashboard,prometheus,spammer,WebAPIToolsBlockEndpoint,activity,snapshot
       --prometheus.processMetrics=false
       --blockLayer.startSynced=true
+      --faucet.seed=7R1itJx5hVuo9w9hjg5cwKFmek4HMSoBDgJZN8hKGxih
     secrets:
       - goshimmer.config.json
       - goshimmer.block.snapshot.bin
