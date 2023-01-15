@@ -12,9 +12,11 @@ docker-compose -f docker-compose.local.yml -f docker-compose.yml up
 
 ## Open dashboards
 
-localhost:8081
-localhost:8071
-localhost:18081
+http://localhost:8081
+
+http://localhost:8071
+
+http://localhost:18081
 
 shows an interface used to see which nodes are active but not using the faucet api
 
