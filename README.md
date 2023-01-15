@@ -3,6 +3,29 @@
 The project was tested on computers running macOs (intel chip) and Linux operating system. 
 To get the project started, you need to have Docker installed. 
 
+## Initial install
+
+This removes old docker versions and sets up the new one including the keys:
+
+sudo apt-get remove docker docker-engine docker.io containerd runc
+
+sudo apt-get update
+
+sudo apt-get install \    ca-certificates \    curl \    gnupg \    lsb-release
+
+sudo mkdir -p /etc/apt/keyringscurl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+sudo apt-get update
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+sudo docker run hello-world
+
+(last line to check if everything works)
+
+Also if you haven't git clone this repo.
+
+
 ## Start the network
 
 cd ~/goshimmer/tools/docker-network
