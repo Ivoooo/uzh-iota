@@ -18,8 +18,7 @@ http://localhost:8071
 
 http://localhost:18081
 
-shows an interface used to see which nodes are active but not using the faucet api
-
+opens an interface in which you can get information about the node such as Blocks Per Second and  Memory Usage
 
 
 http://localhost:9000
