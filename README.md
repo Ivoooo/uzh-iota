@@ -22,14 +22,14 @@ shows an interface used to see which nodes are active but not using the faucet a
 
 
 
-localhost:9000
+http://localhost:9000
 
 shows an interface used to see which nodes are active
 
 
 ### faucet node
 
-localhost:8091
+http://localhost:8091
 
 shows the interface of the node running the faucet api 
 
@@ -40,7 +40,11 @@ curl --location 'http://localhost:8090/spammer?cmd=start&rate=100'
 
 curl --location 'http://localhost:8090/spammer?cmd=stop'
 
-it possible to change on witch node to start the spammer by changing the port from 8090 to the desidered one
+it possible to change on which node to start the spammer by changing the port from 8090 to the desidered one ( e.g. 
+curl --location 'http://localhost:8080/spammer?cmd=start&rate=100')
+
+its also possible to increase ore decrese the rate of the spammer by changing the rate value ( e.g. 
+curl --location 'http://localhost:8090/spammer?cmd=start&rate=10')
 
 
 ## Get the mana perception of the node in the network. 
